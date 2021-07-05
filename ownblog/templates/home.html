@@ -1,0 +1,64 @@
+{%extends 'layout.html' %}
+{%block content%}
+    {%with messages = get_flashed_messages(with_categories=True) %}
+        {%if messages%}
+            {%for category, message in messages%}
+                <div class='alert alert-{{category}}'>
+                    {{message}}
+                </div>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    <div class="container centered" >
+    {%for post in posts.items%}
+
+    <div class="card">
+        <div class="container">
+ 
+            <h3><a href="{{url_for('see_post', post_id=post.id)}}" >{{post.title}}</a></h3><span><p> ---{{post.author.username}}</p></span>
+            
+                {%if post.upvotes-2*post.downvotes>0%}
+                
+                <div class="chip green white-text">
+                    Verified
+                </div>
+                {%else%}
+                
+                <div class="chip">
+                    Unverified
+                </div>
+                {%endif%}
+               
+            <div class="divider"></div>
+            <div class="card-content">
+                <p>{{post.content}}</p>
+            </div>
+            <div class="card-action">
+                <span> <a href="{{url_for('upvote',post_id=post.id)}}"><i class="material-icons">north</i></a></span>
+                <span><a href="{{url_for('downvote',post_id=post.id)}}"><i class="material-icons">south</i></a></span>
+                <span class="row-margin"> {{post.upvotes-post.downvotes}}</span>      
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    </div>
+    <div class="container">
+        <div class="row">
+    {%for page_num in posts.iter_pages(left_edge=1,right_edge=1,left_current=1 , right_current=2)%}
+        {%if page_num%}
+            {%if page_num==posts.page%}
+            <a class="btn btn-info"href="{{url_for('home', page=page_num)}}">{{page_num}}</a>
+            {%else%}
+            <a class="btn btn-outline-info"href="{{url_for('home', page=page_num)}}">{{page_num}}</a>
+            {%endif%}
+        {%else%}
+        .....
+
+        {%endif%}
+
+    {%endfor%}
+    </div>   
+</div>
+
+
+{%endblock%}

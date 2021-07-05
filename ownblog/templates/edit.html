@@ -1,0 +1,27 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div class="container">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+            <div class="form-group ">
+                <div class ="row">
+                    {{form.title.label(class="form-control-label")}}
+                    {{form.title(class="form-control form-control-lg")}}
+                </div>
+                <div class="row">
+                    <small class="text-secondary">The title should be intresting!!</small>
+                </div>
+
+                <div class ="row" style="height: auto;">
+                    {{form.post.label(class="form-control-label")}}
+                    {{form.post(class="form-control form-control-lg")}}
+                </div>
+
+                <div class="row" style="margin-top: 10px;">
+                {{form.submit(class="btn btn-outline-info")}}
+                </div>
+            </div>
+    </form>
+</div>
+
+{%endblock%}

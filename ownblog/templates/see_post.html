@@ -1,0 +1,110 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div class="container ">
+    <div>
+        <h4>{{post.title}}</h4>
+    </div>  
+    <div class="row">
+        <div class="col-md-6"><h6>Author:<i>{{post.author.username}}</i></h6></div>     
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        <p style="font-size: large;">{{post.content}}</p>
+        </div>
+    </div>
+    <div>
+        <div class="row" style="margin-top: 10px;">
+            <span> <a href="{{url_for('upvote',post_id=post.id)}}"><i class="material-icons">north</i></a></span>
+            <span><a href="{{url_for('downvote',post_id=post.id)}}"><i class="material-icons">south</i></a></span>
+            <span class="row-margin"> {{post.upvotes-post.downvotes}}</span>
+        </div>
+    </div>
+</div>
+<div >
+    {%if post.author==current_user%}
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-primary m-2" href="{{url_for('edit_post', post_id=post.id )}}">Update</a>
+            <!-- <button class= "btn red m-2 " data-toggle="modal" data-target="#exampleModal">Delete</button> -->
+            <span class="row-margin">  <a class="waves-effect waves-light btn modal-trigger" href="#modal_delete">Delete</a></span>
+
+        </div>
+    </div>    
+    
+    {%endif%}
+        <!-- Modal -->
+  <div class="container">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+            <div>
+                <div class ="row" style="height: auto;">
+                    <div class="col s10">
+                    {{form.post(class="input-field materialize-textarea")}}
+                    </div>
+                    <div class="col s2">
+                        {{form.submit(class="btn purple")}}
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 10px;">
+                
+                </div>
+            </div>
+    </form>
+    <span class="row-margin">  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Share</a></span>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Enter email</h4>
+        <form method="POST" action=" " name="gmail">
+            <input type="email" name="email_send" required class="validate">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <button class="btn waves-effect waves-light" type="submit" name="email" value="ss">Send
+    </div>
+</form>
+</div>
+
+
+<div id="modal_delete" class="modal">
+    <div class="modal-content">
+      <p>Are you sure you want to delete?</p>
+        <form method="POST" action=" " name="delete">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <button class="btn waves-effect waves-light" type="submit" name="delete" value="{{post.id}}">Delete
+    </div>
+</form>
+</div>
+
+
+<span class="row-margin">  <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Twitter</a></span>
+
+</div>
+
+
+    <div class="container">
+        {%for comment in comments%}
+        <br>
+            <div class="row">
+                <div class="col s1">
+                    <i class="material-icons md-36" style="font-size: 38px;">account_circle</i>
+                    <span>{{comment.comment_author.username}}</span>
+                </div>
+                <div class="col s11">
+                    <p>{{comment.content}}</p>
+                </div>
+
+            </div>
+            
+            
+
+        {%endfor%}
+    </div>
+
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      
+        <title>Dashboard</title>
+        
+            <!--suppress JSUnresolvedLibraryURL -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <!--suppress JSUnresolvedLibraryURL -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <!--suppress JSUnresolvedLibraryURL -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+            <!--Import Google Icon Font-->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+            <!--Let browser know website is optimized for mobile-->
+
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            
+            <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+            <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/materialize.min.css') }}"> -->
+            <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+            <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> 
+    </head> 
+    <nav >
+        <div class="nav-wrapper purple ">
+          <a href="#" class="brand-logo">SPEM_CT4</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('home')}}" >Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('twitter')}}" >Explore</a>
+            </li>
+            {%if current_user.is_authenticated%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('post')}}">Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('see_user', user_id=current_user.id)}}">Account</a>
+            </li>
+            {%else%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('register')}}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('login')}}">Login</a>
+            </li>
+  
+            {%endif%}
+          </ul>
+        </div>
+</nav>
+    <img src="/static/wave(3).svg">
+  <body>
+
+    
+    
+      
+    <div class="container card centered">
+        <form method="POST" action="">
+            {{form.hidden_tag()}}
+                <div class="row">
+                    <div class="col s7">
+                        <img src="/static/Wavy_Tech-01_Single-12.jpg" style="height: 90%; width: 90%;">
+                    </div>
+                    
+                    <div class="col s5" >
+
+                        <div class="container" style="margin-top: 30%;">
+                            <h4>Username</h4>
+                        <div>{{form.username(placeholder="Enter username")}}</div><br>
+                        <h4>Password</h4>
+                        <div>{{form.password(placeholder="Enter password")}}</div><br>
+                        <h4>Confirm Password</h4>
+                        <div>{{form.confirm_password(placeholder="Enter password")}}</div><br>
+                        <div>
+                            {{form.submit(class="btn btn-large purple")}}
+                        </div>    
+                    </div>
+                </div>
+        </form>
+    </div>
+
+
+
+    <!--JavaScript at end of body for optimized loading-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+       <script type="text/javascript" src="js/materialize.min.js"></script>
+  
+  </body>
+
+</html>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <body>
+            </div>
+    
